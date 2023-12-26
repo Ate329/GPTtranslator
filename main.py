@@ -1,40 +1,35 @@
-# Import necessary libraries
 import openai
 import tkinter as tk
 
 # Initialize API key variable
-api_key = ""
-
-
-# Initialize API key variable
 def api_window():
     global api_key
+    # Create GUI window for API key input
+    window = tk.Tk()
+    window.title("API key")
+    window.geometry("200x135")
+    
+    # Add label and entry field for API key input
+    label = tk.Label(window, text="Enter api key")
+    label.pack(pady=10)
+    entry = tk.Entry(window)
+    entry.pack(pady=10)
+    
+    # Add button to submit API key
+    button = tk.Button(window, text="Enter", command=api_window)
+    button.pack(pady=10)
+    
+    # Run GUI window
+    window.mainloop()
     api_key = entry.get()
+    
     if window:
         window.destroy()
-
-
-# Create GUI window for API key input
-window = tk.Tk()
-window.title("API key")
-window.geometry("200x135")
-
-# Add label and entry field for API key input
-label = tk.Label(window, text="Enter api key")
-label.pack(pady=10)
-entry = tk.Entry(window)
-entry.pack(pady=10)
-
-# Add button to submit API key
-button = tk.Button(window, text="Enter", command=api_window)
-button.pack(pady=10)
-
-# Run GUI window
-window.mainloop()
+        
+    return api_key
 
 # Set OpenAI API key
-openai.api_key = api_key
-
+openai.api_key = api_window()
 
 # Function to translate text using OpenAI API
 def translate_text(text, model_engine, target_language):
